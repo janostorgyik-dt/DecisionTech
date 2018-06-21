@@ -1,3 +1,5 @@
 .vs/
 DecisionTech.Web/obj/
 DecisionTech.Web/bin/
+DecisionTech.Basket/obj/
+DecisionTech.Basket.UnitTest/obj/
