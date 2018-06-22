@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="DomainServices\BasketService.cs" />
+    <Compile Remove="DomainServices\InMemoryStorageService.cs" />
+  </ItemGroup>
+
 </Project>
