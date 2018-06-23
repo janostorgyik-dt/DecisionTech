@@ -38,8 +38,8 @@ namespace DecisionTech.Web
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Basket API", Version = "v1" });
+                c.IncludeXmlComments(AppContext.BaseDirectory + "\\DecisionTech.Web.xml");
             });
-
 
         }
 

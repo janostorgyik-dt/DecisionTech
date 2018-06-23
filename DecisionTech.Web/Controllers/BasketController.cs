@@ -14,13 +14,26 @@ namespace DecisionTech.Web.Controllers
         {
             _basketService = basketService;
         }
-        
+
+        /// <summary>
+        /// Gets the total price of the specified basket
+        /// </summary>
+        /// <param name="basketId">The Id of the basket</param>
+        /// <returns>Total price of the basket including discounts</returns>
         [HttpGet("totalprice/{basketId}")]
-        public ActionResult<string> GetTotalPrice(string basketId)
+        public ActionResult<decimal> GetTotalPrice(string basketId)
         {
-            return Ok(this._basketService.GetTotalPrice(basketId));
+            var total = this._basketService.GetTotalPrice(basketId);
+
+            return Ok(total);
         }
-        
+
+        /// <summary>
+        /// Adds a new item to the specified basket.
+        /// If the basket does not exist, a new one will be created.
+        /// </summary>
+        /// <param name="basketId">The id of the basket to be updated</param>
+        /// <param name="itemId">The id of the item to be added to the basket</param>
         [HttpPut("{basketId}/{itemId}")]
         public void Put(string basketId, string itemId)
         {
