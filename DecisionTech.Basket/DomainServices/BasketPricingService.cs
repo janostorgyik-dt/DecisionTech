@@ -40,7 +40,7 @@ namespace DecisionTech.Basket.DomainServices
             {
                 return 0;
             }
-
+            
             var discountMultiplier = Math.Floor(ItemCount(basket, "butter") / 2m);
 
             return Math.Min(discountMultiplier, ItemCount(basket, "bread")) * ItemPrice(basket, "bread") * .5m;
@@ -68,10 +68,10 @@ namespace DecisionTech.Basket.DomainServices
             {
                 return 0;
             }
-
+            
             var discountMultiplier = Math.Floor(ItemCount(basket, "milk") / 4m);
 
-            return Math.Min(discountMultiplier, ItemCount(basket, "milk")) * ItemPrice(basket, "milk") * discountMultiplier;
+            return Math.Min(discountMultiplier, ItemCount(basket, "milk")) * ItemPrice(basket, "milk");
         }
     }
 }
