@@ -26,8 +26,39 @@ namespace DecisionTech.Basket.DomainServices
                 return 0;
             }
 
-            return basket.Items.Sum(x => x.Quantity * x.UnitPrice);
+            var milkDiscount = 0; //this.CalculateMilkDiscount(basket);
+            var butterDiscount = this.CalculateButterDiscount(basket);
 
+            return basket.Items.Sum(x => x.Quantity * x.UnitPrice) - milkDiscount - butterDiscount;
+
+        }
+
+        private decimal CalculateButterDiscount(BasketModel basket)
+        {
+            // Decide eligibility 
+            if (ItemCount(basket, "butter") < 2 || ItemCount(basket, "bread") < 1)
+            {
+                return 0;
+            }
+
+            var discountMultiplier = Math.Floor(ItemCount(basket, "butter") / 2m);
+
+            return Math.Min(discountMultiplier, ItemCount(basket, "bread")) * ItemPrice(basket, "bread") * .5m;
+        }
+
+        private static int ItemCount(BasketModel basket, string itemId)
+        {
+            return basket.Items.Single(x => string.Equals(x.ItemId, itemId, StringComparison.InvariantCultureIgnoreCase)).Quantity;
+        }
+
+        private static decimal ItemPrice(BasketModel basket, string itemId)
+        {
+            return basket.Items.Single(x => string.Equals(x.ItemId, itemId, StringComparison.InvariantCultureIgnoreCase)).UnitPrice;
+        }
+
+        private decimal CalculateMilkDiscount(BasketModel basket)
+        {
+            throw new NotImplementedException();
         }
     }
 }
