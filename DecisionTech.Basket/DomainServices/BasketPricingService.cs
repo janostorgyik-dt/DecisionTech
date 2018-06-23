@@ -26,7 +26,7 @@ namespace DecisionTech.Basket.DomainServices
                 return 0;
             }
 
-            var milkDiscount = 0; //this.CalculateMilkDiscount(basket);
+            var milkDiscount = this.CalculateMilkDiscount(basket);
             var butterDiscount = this.CalculateButterDiscount(basket);
 
             return basket.Items.Sum(x => x.Quantity * x.UnitPrice) - milkDiscount - butterDiscount;
@@ -48,17 +48,30 @@ namespace DecisionTech.Basket.DomainServices
 
         private static int ItemCount(BasketModel basket, string itemId)
         {
-            return basket.Items.Single(x => string.Equals(x.ItemId, itemId, StringComparison.InvariantCultureIgnoreCase)).Quantity;
+            return FindInBasket(basket, itemId) != null ? FindInBasket(basket, itemId).Quantity : 0;
         }
 
         private static decimal ItemPrice(BasketModel basket, string itemId)
         {
-            return basket.Items.Single(x => string.Equals(x.ItemId, itemId, StringComparison.InvariantCultureIgnoreCase)).UnitPrice;
+            return FindInBasket(basket, itemId) != null ? FindInBasket(basket, itemId).UnitPrice : 0;
+        }
+
+        private static BasketItemModel FindInBasket(BasketModel basket, string itemId)
+        {
+            return basket.Items.SingleOrDefault(x => string.Equals(x.ItemId, itemId, StringComparison.InvariantCultureIgnoreCase));
         }
 
         private decimal CalculateMilkDiscount(BasketModel basket)
         {
-            throw new NotImplementedException();
+            // Decide eligibility 
+            if (ItemCount(basket, "milk") < 4 )
+            {
+                return 0;
+            }
+
+            var discountMultiplier = Math.Floor(ItemCount(basket, "milk") / 4m);
+
+            return Math.Min(discountMultiplier, ItemCount(basket, "milk")) * ItemPrice(basket, "milk") * discountMultiplier;
         }
     }
 }

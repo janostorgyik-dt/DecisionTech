@@ -76,6 +76,7 @@ namespace DecisionTech.Basket.UnitTest.DomainService
         [Test]
         [TestCase(1, 1, 1, 2.95)]
         [TestCase(0, 2, 2, 3.10)]
+        [TestCase(4, 0, 0, 3.45)]
         public void GetBasketTotalPrice_WithEachItemInBasket_ReturnsTotalPrice(int milkQty, int breadQty, int butterQty,
             decimal expectedPrice)
         {
