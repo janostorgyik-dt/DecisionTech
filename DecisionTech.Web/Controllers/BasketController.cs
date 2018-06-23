@@ -33,7 +33,7 @@ namespace DecisionTech.Web.Controllers
         /// If the basket does not exist, a new one will be created.
         /// </summary>
         /// <param name="basketId">The id of the basket to be updated</param>
-        /// <param name="itemId">The id of the item to be added to the basket</param>
+        /// <param name="itemId">The id of the item to be added to the basket (bread, butter or milk)</param>
         [HttpPut("{basketId}/{itemId}")]
         public void Put(string basketId, string itemId)
         {
