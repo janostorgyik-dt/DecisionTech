@@ -165,7 +165,7 @@ namespace DecisionTech.Basket.UnitTest.DomainService
             {
                 Items = new List<BasketItemModel>
                 {
-                    new BasketItemModel {ItemId = "", Quantity = 1, UnitProce = 1}
+                    new BasketItemModel {ItemId = "", Quantity = 1, UnitPrice = 1}
                 }
             };
 

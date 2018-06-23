@@ -104,7 +104,7 @@ namespace DecisionTech.Basket.UnitTest.DomainService
                 {
                     ItemId = "milk",
                     Quantity = milkQty,
-                    UnitProce = 1.15m
+                    UnitPrice = 1.15m
                 });
             }
 
@@ -114,7 +114,7 @@ namespace DecisionTech.Basket.UnitTest.DomainService
                 {
                     ItemId = "bread",
                     Quantity = breadQty,
-                    UnitProce = 1.00m
+                    UnitPrice = 1.00m
                 });
             }
 
@@ -124,7 +124,7 @@ namespace DecisionTech.Basket.UnitTest.DomainService
                 {
                     ItemId = "butter",
                     Quantity = butterQty,
-                    UnitProce = 0.80m
+                    UnitPrice = 0.80m
                 });
             }
 

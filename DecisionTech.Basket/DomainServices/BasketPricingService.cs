@@ -26,8 +26,8 @@ namespace DecisionTech.Basket.DomainServices
                 return 0;
             }
 
+            return basket.Items.Sum(x => x.Quantity * x.UnitPrice);
 
-            return 1;
         }
     }
 }

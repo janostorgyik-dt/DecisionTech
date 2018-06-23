@@ -58,7 +58,7 @@ namespace DecisionTech.Basket.DomainServices
                 {
                     ItemId = itemId,
                     Quantity = 1,
-                    UnitProce = product.Price
+                    UnitPrice = product.Price
                 });
             }
 
