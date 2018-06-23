@@ -1,4 +1,5 @@
 ﻿using System;
+using DecisionTech.Basket.Constant;
 using DecisionTech.Basket.DataAccess;
 using DecisionTech.Basket.DomainObject;
 using DecisionTech.Basket.DomainServices;
@@ -105,9 +106,9 @@ namespace DecisionTech.Basket.UnitTest.DomainService
             {
                 basket.Items.Add(new BasketItemModel
                 {
-                    ItemId = "milk",
+                    ItemId = Item.MilkId,
                     Quantity = milkQty,
-                    UnitPrice = 1.15m
+                    UnitPrice = Item.MilkPrice
                 });
             }
 
@@ -115,9 +116,9 @@ namespace DecisionTech.Basket.UnitTest.DomainService
             {
                 basket.Items.Add(new BasketItemModel
                 {
-                    ItemId = "bread",
+                    ItemId = Item.BreadId,
                     Quantity = breadQty,
-                    UnitPrice = 1.00m
+                    UnitPrice = Item.BreadPrice
                 });
             }
 
@@ -125,9 +126,9 @@ namespace DecisionTech.Basket.UnitTest.DomainService
             {
                 basket.Items.Add(new BasketItemModel
                 {
-                    ItemId = "butter",
+                    ItemId = Item.ButterId,
                     Quantity = butterQty,
-                    UnitPrice = 0.80m
+                    UnitPrice = Item.ButterPrice
                 });
             }
 
