@@ -11,18 +11,12 @@ namespace DecisionTech.Basket.UnitTest.DomainService
     [TestFixture]
     public class BasketPricingServiceTests
     {
-        private Mock<IProductRepository> _productRepositoryMock;
-
-        private BasketPricingService subjet;
+        private BasketPricingService subject;
 
         [SetUp]
         public void SetUp()
         {
-            this._productRepositoryMock = new Mock<IProductRepository>();
-
-            this.subjet = new BasketPricingService(
-                this._productRepositoryMock.Object
-            );
+            this.subject = new BasketPricingService();
         }
 
         [Test]
@@ -31,7 +25,7 @@ namespace DecisionTech.Basket.UnitTest.DomainService
             // Arrange
 
             // Act & Assert
-            Assert.That(() => this.subjet.GetBasketTotalPrice(null),
+            Assert.That(() => this.subject.CalculateBasketTotalPrice(null),
                 Throws.Exception
                     .TypeOf<ArgumentNullException>()
                     .With.Property("ParamName")
@@ -46,7 +40,7 @@ namespace DecisionTech.Basket.UnitTest.DomainService
             var basket = new BasketModel();
 
             // Act
-            var result = this.subjet.GetBasketTotalPrice(basket);
+            var result = this.subject.CalculateBasketTotalPrice(basket);
 
             // Assert
             Assert.AreEqual(0, result, "The basket price should be 0");
@@ -86,7 +80,7 @@ namespace DecisionTech.Basket.UnitTest.DomainService
             var basket = this.BuildBasket(milkQty, breadQty, butterQty);
 
             // Act
-            var result = this.subjet.GetBasketTotalPrice(basket);
+            var result = this.subject.CalculateBasketTotalPrice(basket);
 
             // Assert
             Assert.AreEqual(expectedPrice, result, "Incorrect total price.");

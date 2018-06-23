@@ -3,10 +3,15 @@
 namespace DecisionTech.Basket.DataAccess
 {
     /// <summary>
-    /// Responsible for storing things
+    /// The product repo...
     /// </summary>
     public interface IProductRepository
     {
+        /// <summary>
+        /// Returns the produce with the specified ID, otherwise null
+        /// </summary>
+        /// <param name="id">The unique id of the product</param>
+        /// <returns>A <see cref="ProductRecord"/> instance.</returns>
         ProductRecord Get(string id);
     }
 }

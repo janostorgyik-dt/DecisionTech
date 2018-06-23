@@ -5,8 +5,9 @@
     /// </summary>
     public interface IStorageService
     {
-        void Put<T>(string key, T value);
+        void Put<T>(string key, T value) where T : class;
 
         T Get<T>(string key) where T : class;
     }
 }
+ 

@@ -5,12 +5,24 @@ using DecisionTech.Basket.DomainObject;
 
 namespace DecisionTech.Basket.DomainServices
 {
+    /// <summary>
+    /// Responsible for managing the basket
+    /// </summary>
     public class BasketService : IBasketService
     {
+        /// <summary>
+        /// The place where we store the baskets
+        /// </summary>
         private readonly IStorageService _storageService;
 
+        /// <summary>
+        /// Repo where the products are defined
+        /// </summary>
         private readonly IProductRepository _productRepository;
 
+        /// <summary>
+        /// The service which responsible for all price calculations
+        /// </summary>
         private readonly IBasketPricingService _basketPricingService;
 
         public BasketService(
@@ -22,11 +34,12 @@ namespace DecisionTech.Basket.DomainServices
             this._productRepository = productRepository;
             _basketPricingService = basketPricingService;
         }
-        public string Create()
-        {
-            return Guid.NewGuid().ToString();
-        }
 
+        /// <summary>
+        /// Adds a new item to a basket
+        /// </summary>
+        /// <param name="basketId">The unique basket ID</param>
+        /// <param name="itemId">The Id of the item to be added.</param>
         public void AddItem(string basketId, string itemId)
         {
             if (string.IsNullOrWhiteSpace(basketId))
@@ -65,6 +78,12 @@ namespace DecisionTech.Basket.DomainServices
             this._storageService.Put(basketId, basket);
         }
 
+
+        /// <summary>
+        /// Calculates the total price of the basket
+        /// </summary>
+        /// <param name="basketId">The unique basket ID</param>
+        /// <returns>Total price of the basket including discounts</returns>
         public decimal GetTotalPrice(string basketId)
         {
             var basket = this._storageService.Get<BasketModel>(basketId);
@@ -74,7 +93,7 @@ namespace DecisionTech.Basket.DomainServices
                 throw new Exception($"The basket with the id '{basketId}' does not exist.");
             }
 
-            return this._basketPricingService.GetBasketTotalPrice(basket);
+            return this._basketPricingService.CalculateBasketTotalPrice(basket);
         }
 
     }

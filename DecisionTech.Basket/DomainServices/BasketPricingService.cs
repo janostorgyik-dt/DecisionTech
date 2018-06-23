@@ -1,21 +1,23 @@
 ﻿using System;
 using System.Linq;
 using DecisionTech.Basket.Constant;
-using DecisionTech.Basket.DataAccess;
 using DecisionTech.Basket.DomainObject;
 
 namespace DecisionTech.Basket.DomainServices
 {
+    /// <summary>
+    /// Responsible for calculating the total price of the basket including discounts
+    /// </summary>
     public class BasketPricingService : IBasketPricingService
     {
-        private IProductRepository _productRepository;
+        #region Public
 
-        public BasketPricingService(IProductRepository productRepository)
-        {
-            this._productRepository = productRepository;
-        }
-
-        public decimal GetBasketTotalPrice(BasketModel basket)
+        /// <summary>
+        /// Calculates the basket total
+        /// </summary>
+        /// <param name="basket">A basket which needs to be calculated</param>
+        /// <returns>The total price of the basket, including discounts.</returns>
+        public decimal CalculateBasketTotalPrice(BasketModel basket)
         {
             if (basket == null)
             {
@@ -27,12 +29,18 @@ namespace DecisionTech.Basket.DomainServices
                 return 0;
             }
 
+            // These could come from a promo service rather than implemented as privates, but since
+            // the calc is simple, this should do
             var milkDiscount = this.CalculateMilkDiscount(basket);
             var butterDiscount = this.CalculateButterDiscount(basket);
 
             return basket.Items.Sum(x => x.Quantity * x.UnitPrice) - milkDiscount - butterDiscount;
-
         }
+        
+
+        #endregion
+
+        #region Private
 
         private decimal CalculateMilkDiscount(BasketModel basket)
         {
@@ -79,5 +87,7 @@ namespace DecisionTech.Basket.DomainServices
         {
             return basket.Items.SingleOrDefault(x => string.Equals(x.ItemId, itemId, StringComparison.InvariantCultureIgnoreCase));
         }
+
+        #endregion
     }
 }
